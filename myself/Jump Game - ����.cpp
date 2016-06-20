@@ -1,13 +1,46 @@
+void plusone(vector<int> &digits)
+{
+    int n = digits.size();
+    for (int i = n - 1; i >= 0; --i)
+    {
+        if (digits[i] == 9)
+        {
+            digits[i] = 0;
+        }
+        else
+        {
+            digits[i]++;
+            return;
+        }
+    }
+        digits[0] =1;
+        digits.push_back(0);
+
+}
+
+my:
 class Solution {
 public:
-	int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
-		int m = obstacleGrid.size() , n = obstacleGrid[0].size();
-		vector<vector<int>> dp(m+1,vector<int>(n+1,0));
-		dp[0][1] = 1;
-		for(int i = 1 ; i <= m ; ++i)
-			for(int j = 1 ; j <= n ; ++j)
-				if(!obstacleGrid[i-1][j-1])
-					dp[i][j] = dp[i-1][j]+dp[i][j-1];
-		return dp[m][n];
+	vector<int> plusOne(vector<int>& digits) {
+		int len=digits.size();
+		vector<int >::iterator it;
+		vector<int> temp;
+		int carry=1,i;
+		for(i=len-1;i>=0;i--){
+			if(digits[i]+carry>=10){
+				digits[i]=0;
+				carry=1;
+			}else{
+				digits[i]=digits[i]+carry;
+				carry=0;
+			}
+		}
+		if(carry==1&&i<0){
+			temp.push_back(1);
+		}
+		for(int i=0;i<len;i++){
+			temp.push_back(digits[i]);
+		}
+		return temp;
 	}
 };
